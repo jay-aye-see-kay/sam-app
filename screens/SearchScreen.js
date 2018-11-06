@@ -15,6 +15,8 @@ export default class SearchScreen extends React.Component {
     const { barcode } = this.state;
     const { assets } = this.props;
 
+    const asset = lookupId(barcode, assets);
+
     if (barcode === null) {
       return (
         <BarcodeScanner
@@ -23,26 +25,27 @@ export default class SearchScreen extends React.Component {
           }}
         />
       );
-    } else if (!barcode) {
-      return (
-        <View>
-          <Text>The barcode could not be read</Text>
-          <Button
-            title="Try again"
-            onPress={() => {
-              this.setState({ barcode: null });
-            }}
-          />
-        </View>
-      );
     }
+
     return (
       <ScrollView style={styles.container}>
-        <Text>The scanned barcode was</Text>
-        <Text>{barcode}</Text>
-        <Text />
-        <Text>Which is attached represents</Text>
-        <Text>{lookupId(barcode, assets).short_description}</Text>
+        {barcode ? (
+          <View>
+            <Text>The scanned barcode was</Text>
+            <Text>{barcode}</Text>
+            <Text />
+            <Text>Which is attached represents</Text>
+            <Text>{asset ? asset.short_description : "UNKNOWN"}</Text>
+          </View>
+        ) : (
+          <Text>The barcode could not be read</Text>
+        )}
+        <Button
+          title="Scan again"
+          onPress={() => {
+            this.setState({ barcode: null });
+          }}
+        />
       </ScrollView>
     );
   }

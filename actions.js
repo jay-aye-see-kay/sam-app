@@ -6,7 +6,7 @@ import { asyncActionCreator } from "redux-action-creator";
  * API helper functions
  */
 
-const URL_BASE = "http://192.168.0.3:8000";
+const URL_BASE = "http://192.168.43.241:8000";
 
 const get = async url => {
   const response = await fetch(`${URL_BASE}${url}`);

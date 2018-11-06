@@ -5,7 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  Button,
   View,
 } from "react-native";
 import { WebBrowser } from "expo";
@@ -17,7 +17,9 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
-  componentDidMount = () => {
+  componentDidMount = () => this.refreshData();
+
+  refreshData = () => {
     const { getOptions, getAssets } = this.props;
     getOptions();
     getAssets();
@@ -32,6 +34,7 @@ export default class HomeScreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
+          <Button title="Refresh data" onPress={this.refreshData} />
           <Text>Assets</Text>
           {Object.values(assets).map(asset => (
             <Text key={asset.id}>{asset.location && asset.location.name}</Text>
