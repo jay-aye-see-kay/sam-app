@@ -7,57 +7,53 @@ import {
 
 import TabBarIcon from "../components/TabBarIcon";
 import HomeContainer from "../screens/HomeContainer";
-import LinksScreen from "../screens/LinksScreen";
-import SettingsScreen from "../screens/SettingsScreen";
+import SearchContainer from "../screens/SearchContainer";
+import AddAssetContainer from "../screens/AddAssetContainer";
 
 const HomeStack = createStackNavigator({
   Home: HomeContainer,
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: "Home",
+  tabBarLabel: "Asset List",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
-      }
+      name={Platform.OS === "ios" ? "ios-list" : "md-list"}
     />
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const AddAssetStack = createStackNavigator({
+  AddAsset: AddAssetContainer,
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: "Links",
+AddAssetStack.navigationOptions = {
+  tabBarLabel: "Add Asset",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-link" : "md-link"}
+      name={Platform.OS === "ios" ? "ios-add" : "md-add"}
     />
   ),
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+const SearchStack = createStackNavigator({
+  Search: SearchContainer,
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: "Settings",
+SearchStack.navigationOptions = {
+  tabBarLabel: "Barcode Search",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
+      name={Platform.OS === "ios" ? "ios-search" : "md-search"}
     />
   ),
 };
 
 export default createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
+  AddAssetStack,
+  SearchStack,
 });
