@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "sam-app",
-    "description": "A very interesting project.",
-    "slug": "sam-app",
+    "name": "sam",
+    "description": "Seed Asset Manager",
+    "slug": "sam",
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": ["ios", "android"],
@@ -17,11 +17,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.burningseed.sam"
+    },
+    "android": {
+      "package": "com.burningseed.sam"
     }
   }
 }
