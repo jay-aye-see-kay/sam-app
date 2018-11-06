@@ -18,14 +18,13 @@ export default class HomeScreen extends React.Component {
   };
 
   componentDidMount = () => {
-    const { getAssets } = this.props;
+    const { getOptions, getAssets } = this.props;
+    getOptions();
     getAssets();
   };
 
   render = () => {
     const { assets } = this.props;
-
-    console.log(assets);
 
     return (
       <View style={styles.container}>
@@ -35,7 +34,7 @@ export default class HomeScreen extends React.Component {
         >
           <Text>Assets</Text>
           {Object.values(assets).map(asset => (
-            <Text key={asset.id}>{asset.location}</Text>
+            <Text key={asset.id}>{asset.location && asset.location.name}</Text>
           ))}
         </ScrollView>
 

@@ -30,6 +30,15 @@ const entities = (
   action
 ) => {
   switch (action.type) {
+    case types.GET_OPTIONS_SUCCESS:
+      const { asset_types, brands, locations } = action.response;
+      return {
+        ...state,
+        assetTypes: toObject(asset_types),
+        brands: toObject(brands),
+        locations: toObject(locations),
+      };
+
     case types.GET_ASSETS_SUCCESS:
       return {
         ...state,

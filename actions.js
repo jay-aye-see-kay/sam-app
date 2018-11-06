@@ -26,12 +26,17 @@ const post = async (url, options) => {
 /**
  * Action Types
  */
-const types = createTypes([...async("GET_ASSETS"), ...async("ADD_ASSET")]);
+const types = createTypes([
+  ...async("GET_OPTIONS"),
+  ...async("GET_ASSETS"),
+  ...async("ADD_ASSET"),
+]);
 
 /**
  * Actions
  */
 const actions = {
+  getOptions: asyncActionCreator(types.GET_OPTIONS, () => get("/options/")),
   getAssets: asyncActionCreator(types.GET_ASSETS, () => get("/assets/")),
   addAsset: asyncActionCreator(
     types.ADD_ASSET,
