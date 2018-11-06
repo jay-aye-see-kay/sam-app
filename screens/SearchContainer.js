@@ -8,11 +8,7 @@ const mapStateToProps = state => ({
   assets: nestedAssetsSelector(state),
 });
 
-const mapDispatchToProps = {
-  getOptions: actions.getOptions,
-  getAssets: actions.getAssets,
-  addAsset: actions.addAsset,
-};
+const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,
