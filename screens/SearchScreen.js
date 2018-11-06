@@ -2,6 +2,7 @@ import React from "react";
 import { ScrollView, View, Text, StyleSheet, Button } from "react-native";
 
 import BarcodeScanner from "../components/BarcodeScanner";
+import AssetCard from "../components/AssetCard";
 
 const lookupId = (barcode, assets) =>
   Object.values(assets).find(asset => asset.barcode === barcode);
@@ -29,23 +30,31 @@ export default class SearchScreen extends React.Component {
 
     return (
       <ScrollView style={styles.container}>
+        <View style={{ margin: 24, marginTop: 12 }}>
+          <Button
+            title="Scan again"
+            onPress={() => {
+              this.setState({ barcode: null });
+            }}
+          />
+        </View>
         {barcode ? (
           <View>
-            <Text>The scanned barcode was</Text>
-            <Text>{barcode}</Text>
-            <Text />
-            <Text>Which is attached represents</Text>
-            <Text>{asset ? asset.short_description : "UNKNOWN"}</Text>
+            <View style={{ margin: 24, marginTop: 12 }}>
+              <Text>The scanned barcode was</Text>
+              <Text>{barcode}</Text>
+            </View>
+            <View>
+              {asset ? (
+                <AssetCard asset={asset} />
+              ) : (
+                <Text>The barcode did not match anything in the database</Text>
+              )}
+            </View>
           </View>
         ) : (
           <Text>The barcode could not be read</Text>
         )}
-        <Button
-          title="Scan again"
-          onPress={() => {
-            this.setState({ barcode: null });
-          }}
-        />
       </ScrollView>
     );
   }

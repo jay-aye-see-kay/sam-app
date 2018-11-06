@@ -7,10 +7,10 @@ import {
   Text,
   Button,
   View,
+  FlatList,
 } from "react-native";
-import { WebBrowser } from "expo";
 
-import { MonoText } from "../components/StyledText";
+import AssetCard from "../components/AssetCard";
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -34,18 +34,15 @@ export default class HomeScreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
         >
-          <Button title="Refresh data" onPress={this.refreshData} />
-          <Text>Assets</Text>
-          {Object.values(assets).map(asset => (
-            <Text key={asset.id}>{asset.location && asset.location.name}</Text>
-          ))}
+          <View style={{ margin: 24, marginTop: 12 }}>
+            <Button title="Refresh data" onPress={this.refreshData} />
+          </View>
+          <FlatList
+            data={Object.values(assets)}
+            renderItem={({ item }) => <AssetCard asset={item} />}
+            keyExtractor={item => `${item.id}`}
+          />
         </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>
-            This element is fixed to the bottom
-          </Text>
-        </View>
       </View>
     );
   };
