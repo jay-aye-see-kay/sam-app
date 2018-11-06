@@ -1,6 +1,7 @@
 import React from "react";
+import { Platform } from "react-native";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Camera, Permissions } from "expo";
+import { Icon, Camera, Permissions } from "expo";
 
 export default class BarcodeScannerExample extends React.Component {
   state = {
@@ -35,13 +36,16 @@ export default class BarcodeScannerExample extends React.Component {
               flex: 1,
               backgroundColor: "transparent",
               flexDirection: "row",
+              alignItems: "flex-start",
+              justifyContent: "flex-end",
             }}
           >
             <TouchableOpacity
               style={{
                 flex: 0.1,
-                alignSelf: "flex-end",
                 alignItems: "center",
+                marginTop: 24,
+                marginRight: 12,
               }}
               onPress={() => {
                 this.setState({
@@ -49,9 +53,14 @@ export default class BarcodeScannerExample extends React.Component {
                 });
               }}
             >
-              <Text style={{ fontSize: 18, marginBottom: 10, color: "white" }}>
-                Torch on
-              </Text>
+              <Icon.Ionicons
+                name={this.props.name}
+                size={26}
+                color="white"
+                name={
+                  Platform.OS === "ios" ? "ios-flashlight" : "md-flashlight"
+                }
+              />
             </TouchableOpacity>
           </View>
         </Camera>
