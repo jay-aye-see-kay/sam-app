@@ -1,12 +1,12 @@
-import { createTypes, async } from "redux-action-creator";
+import { asyncActionCreator, createTypes, async } from "redux-action-creator";
 import { schema } from "normalizr";
-import { asyncActionCreator } from "redux-action-creator";
 
 /**
  * API helper functions
  */
 
-const URL_BASE = "http://seed.jackrose.co.nz";
+// const URL_BASE = "http://seed.jackrose.co.nz";
+const URL_BASE = "http://192.168.43.241:8000";
 
 const get = async url => {
   const response = await fetch(`${URL_BASE}${url}`);
@@ -14,10 +14,15 @@ const get = async url => {
   return json;
 };
 
-const post = async (url, options) => {
+const post = async (url, payload, options) => {
   const response = await fetch(`${URL_BASE}${url}`, {
     method: "POST",
     ...options,
+    body: JSON.stringify(payload),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
   });
   const json = await response.json();
   return json;
@@ -40,7 +45,12 @@ const actions = {
   getAssets: asyncActionCreator(types.GET_ASSETS, () => get("/assets/")),
   addAsset: asyncActionCreator(
     types.ADD_ASSET,
-    /*"electric", "wheels",*/ {
+    "short_description",
+    "barcode",
+    "assetType",
+    "brand",
+    "location",
+    {
       action: payload => post("/assets/", payload),
       schema: new schema.Entity("assets"),
     }

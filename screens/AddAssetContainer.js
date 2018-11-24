@@ -2,10 +2,18 @@ import { connect } from "react-redux";
 
 import AddAssetScreen from "./AddAssetScreen";
 import { actions } from "../actions";
-import { nestedAssetsSelector } from "../selectors";
+import {
+  nestedAssetsSelector,
+  assetTypesSelector,
+  brandsSelector,
+  locationsSelector,
+} from "../selectors";
 
 const mapStateToProps = state => ({
   assets: nestedAssetsSelector(state),
+  assetTypes: Object.values(assetTypesSelector(state)),
+  brands: Object.values(brandsSelector(state)),
+  locations: Object.values(locationsSelector(state)),
 });
 
 const mapDispatchToProps = {
