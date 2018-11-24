@@ -47,7 +47,7 @@ const actions = {
     types.ADD_ASSET,
     "short_description",
     "barcode",
-    "assetType",
+    "asset_type",
     "brand",
     "location",
     {
